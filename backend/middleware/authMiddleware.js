@@ -11,6 +11,7 @@ const authMiddleware = (req, res, next) => {
 
   try {
     const verified = jwt.verify(token, process.env.JWT_SECRET);
+    // console.log("Decoded token:", verified);
     req.user = verified;
     next();
   } catch (error) {
@@ -19,6 +20,23 @@ const authMiddleware = (req, res, next) => {
   }
 };
 
+
+// const authMiddleware = (req, res, next) => {
+//     const authHeader = req.headers.authorization;
+//     const token = authHeader && authHeader.split(" ")[1];
+    
+//     if (!token) return res.status(401).json({ message: "Access Denied" });
+  
+//     try {
+//       // Decode token using the secret key and set the user in the request
+//       const verified = jwt.verify(token, process.env.JWT_SECRET);
+//       req.user = verified; // Assuming the token payload contains the user info with `_id`
+//       next();
+//     } catch (error) {
+//       console.error("Token verification error:", error.message);
+//       res.status(400).json({ message: "Invalid Token" });
+//     }
+//   };
 export default authMiddleware;
 
 

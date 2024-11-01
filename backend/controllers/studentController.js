@@ -47,10 +47,34 @@ export const getAllStudents = async (req, res) => {
     try {
       const userId = req.user.id;  // User ID from the authenticated request
     //   console.log(userId)
+    
       const students = await Student.find({ createdBy: userId }); // Find students linked to the owner
     //   console.log(students)
       res.status(200).json(students);
     } catch (error) {
       res.status(500).json({ message: 'Error fetching students', error });
+    }
+  };
+
+
+export const deleteStudent = async (req, res) => {
+    const { id } = req.params;
+    console.log(id);
+    try {
+      // Find the student by ID and ensure it belongs to the authenticated user
+    //   console.log(req.user._id)
+      const student = await Student.findOne({ _id: id, createdBy: req.user.id });
+    //   console.log(student)
+      if (!student) {
+        return res.status(404).json({ message: 'Student not found or not authorized to delete' });
+      }
+  
+      // Delete the student
+    //   await student.remove();
+      await student.deleteOne(); // Use deleteOne instead of remove
+      res.status(200).json({ message: 'Student deleted successfully' });
+    } catch (error) {
+      res.status(500).json({ message: 'Error deleting student', error: error.message });
+        console.log(error)
     }
   };
