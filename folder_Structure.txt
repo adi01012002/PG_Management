@@ -1,0 +1,79 @@
+//// Frontend Folder structure 
+
+frontend/
+├── public/                        # Public assets like images, icons
+├── src/
+│   ├── components/
+│   │   ├── AuthForm.js            # Login and registration form component
+│   │   ├── StudentForm.js         # Form to add/update student data
+│   │   ├── StudentList.js         # List of students
+│   │   ├── StudentDetails.js      # Displays details of a single student
+│   │   ├── PaymentHistory.js       # Component to display payment history
+│   │   ├── StudentSearch.js        # Component to search for students
+│   ├── pages/
+│   │   ├── HomePage.js            # Home page for PG owners
+│   │   ├── Dashboard.js           # Dashboard showing student data
+│   │   ├── LoginPage.js           # Login page for PG owners
+│   │   ├── RegisterPage.js        # Registration page for PG owners
+│   ├── services/
+│   │   ├── authService.js         # API calls for authentication (login/register)
+│   │   ├── studentService.js      # API calls for student operations (CRUD)
+│   │   ├── paymentService.js      # API calls for payment operations
+│   ├── redux/
+│   │   ├── actions/
+│   │   │   ├── authActions.js     # Redux actions for auth
+│   │   │   ├── studentActions.js  # Redux actions for student operations
+│   │   ├── reducers/
+│   │   │   ├── authReducer.js     # Redux reducer for authentication state
+│   │   │   ├── studentReducer.js  # Redux reducer for student data
+│   │   ├── store.js               # Redux store setup with thunk
+|   ├── styles/                        # CSS files for styling
+│   ├── HomePage.css               # Styles for Home Page
+│   ├── Dashboard.css              # Styles for Dashboard
+│   ├── LoginPage.css              # Styles for Login Page
+│   ├── RegisterPage.css           # Styles for Registration Page
+│   ├── StudentForm.css             # Styles for Student Form
+│   ├── StudentList.css            # Styles for Student List
+│   ├── StudentDetails.css         # Styles for Student Details
+│   ├── PaymentHistory.css         # Styles for Payment History
+│   └── StudentSearch.css          # Styles for Student Search
+│   ├── App.js                     # Main React component
+│   ├── index.js                   # Main entry point
+├── package.json                   # React app dependencies and scripts
+├── .env                           # Environment variables for API URL (if required)
+
+
+
+/// Backend Folder structure
+
+
+
+backend/
+├── controllers/
+│   ├── authController.js          # Authentication operations
+│   ├── studentController.js       # Student operations
+│   ├── paymentController.js       # Payment operations
+├── models/
+│   ├── studentModel.js            # Model for student data
+│   ├── paymentModel.js            # Model for payment records
+│   └── userModel.js               # Model for PG owners (authentication)
+├── routes/
+│   ├── authRoutes.js              # Routes for authentication
+│   ├── studentRoutes.js           # Routes for student operations
+│   ├── paymentRoutes.js           # Routes for payment operations
+├── services/
+│   ├── authService.js             # Service for authentication
+│   ├── studentService.js          # Service for student operations
+│   └── paymentService.js          # Service for payment operations
+├── utils/                         # Utility functions
+│   ├── errorHandler.js            # Error handling utilities
+│   └── passwordHash.js            # Bcrypt password hashing utility
+├── validations/                   # Joi validation schemas
+│   ├── authValidation.js          # Validation for auth data
+│   └── studentValidation.js       # Validation for student data
+├── config.js                      # Configuration settings (e.g., database connection)
+├── server.js                      # Main server file
+├── .env                           # Environment variables (e.g., database URI, JWT secret)
+├── package.json                   # Backend dependencies and scripts
+└── README.md                      # Project documentation
+and this is for backend  folder structure and now I want code for only pg owner can login and register in this application and have function to add Student with all basic information with address number year and all basic information only valid user can login and valid user can add Student in his database 
