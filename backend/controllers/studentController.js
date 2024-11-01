@@ -24,6 +24,8 @@
 
 import Student from '../models/studentModel.js';
 
+
+// add student 
 export const addStudent = async (req, res) => {
   try {
     // `req.user` is set by your auth middleware and contains the user ID
@@ -56,7 +58,7 @@ export const getAllStudents = async (req, res) => {
     }
   };
 
-
+ // Delete the student
 export const deleteStudent = async (req, res) => {
     const { id } = req.params;
     console.log(id);
@@ -69,7 +71,7 @@ export const deleteStudent = async (req, res) => {
         return res.status(404).json({ message: 'Student not found or not authorized to delete' });
       }
   
-      // Delete the student
+     
     //   await student.remove();
       await student.deleteOne(); // Use deleteOne instead of remove
       res.status(200).json({ message: 'Student deleted successfully' });
@@ -78,3 +80,30 @@ export const deleteStudent = async (req, res) => {
         console.log(error)
     }
   };
+
+
+  // Update student details
+export const updateStudent = async (req, res) => {
+    const { id } = req.params; // Get student ID from URL parameters
+    const { name, age, address, phoneNumber, year } = req.body; // Get the updated data
+
+    try {
+        const student = await Student.findById(id); // Find the student by ID
+        if (!student) {
+            return res.status(404).json({ message: 'Student not found' });
+        }
+
+        // Update student details
+        student.name = name || student.name; // Use existing value if not provided
+        student.age = age || student.age;
+        student.address = address || student.address;
+        student.phoneNumber = phoneNumber || student.phoneNumber;
+        student.year = year || student.year;
+
+        await student.save(); // Save the updated student
+
+        res.status(200).json(student); // Return the updated student
+    } catch (error) {
+        res.status(500).json({ message: 'Error updating student', error: error.message });
+    }
+};
