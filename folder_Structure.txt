@@ -55,6 +55,8 @@ backend/
 ├── models/
 │   ├── studentModel.js            # Model for student data
 │   └── userModel.js               # Model for PG owners (authentication)
+├── middleware/
+│   ├── authmiddleware.js          # middleware for user
 ├── routes/
 │   ├── authRoutes.js              # Routes for authentication
 │   ├── studentRoutes.js           # Routes for student operations
