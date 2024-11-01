@@ -42,3 +42,15 @@ export const addStudent = async (req, res) => {
     res.status(500).json({ message: "Error creating student", error });
   }
 };
+
+export const getAllStudents = async (req, res) => {
+    try {
+      const userId = req.user.id;  // User ID from the authenticated request
+    //   console.log(userId)
+      const students = await Student.find({ createdBy: userId }); // Find students linked to the owner
+    //   console.log(students)
+      res.status(200).json(students);
+    } catch (error) {
+      res.status(500).json({ message: 'Error fetching students', error });
+    }
+  };

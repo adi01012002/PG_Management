@@ -47,7 +47,7 @@ db.on("open", () => {
 
 // MONGODB_URL=mongodb+srv://aditya10462004:Q6DTBofGd9fWHDFh@cluster0.e6ud1.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
 
-
+// these are two user of this application
 // "_id": "6723f9c97f28c3df6e41d3bc",
 // "username": "adi",
 // "email": "adi01@gmail.com",
