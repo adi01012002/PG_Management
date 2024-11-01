@@ -52,19 +52,12 @@ backend/
 ├── controllers/
 │   ├── authController.js          # Authentication operations
 │   ├── studentController.js       # Student operations
-│   ├── paymentController.js       # Payment operations
 ├── models/
 │   ├── studentModel.js            # Model for student data
-│   ├── paymentModel.js            # Model for payment records
 │   └── userModel.js               # Model for PG owners (authentication)
 ├── routes/
 │   ├── authRoutes.js              # Routes for authentication
 │   ├── studentRoutes.js           # Routes for student operations
-│   ├── paymentRoutes.js           # Routes for payment operations
-├── services/
-│   ├── authService.js             # Service for authentication
-│   ├── studentService.js          # Service for student operations
-│   └── paymentService.js          # Service for payment operations
 ├── utils/                         # Utility functions
 │   ├── errorHandler.js            # Error handling utilities
 │   └── passwordHash.js            # Bcrypt password hashing utility
