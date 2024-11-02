@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import authRoutes from "./routes/authRoutes.js";
 import studentRoutes from "./routes/studentRoutes.js"; 
+import paymentRoutes from './routes/paymentRoutes.js';
 const app = express();
 dotenv.config();
 
@@ -14,6 +15,7 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 // Routes
 app.use("/auth", authRoutes);       // Authentication routes
 app.use("/students", studentRoutes); // Student routes
+app.use('/payments', paymentRoutes); // Payment routes
 // app.get("/", (req, res) => {
 //   res.send("Hello World");
 // });
