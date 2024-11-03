@@ -10,8 +10,8 @@ const router = express.Router();
 
 router.post("/add", authMiddleware, addStudent);
 router.get("/list", authMiddleware, getAllStudents);
-router.delete('/:id', authMiddleware, deleteStudent)
-router.put('/edit/:id', authMiddleware, updateStudent);
 router.get('/:id', authMiddleware, getStudentById);
+router.put('/edit/:id', authMiddleware, updateStudent);
+router.delete('/:id', authMiddleware, deleteStudent)
 
 export default router;

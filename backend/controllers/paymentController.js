@@ -17,7 +17,7 @@ export const getPaymentsByStudent = async (req, res) => {
 export const addPayment = async (req, res) => {
   try {
     const { id } = req.params;
-    console.log(id)
+    // console.log(id)
     const { amount, date, type, description } = req.body;
 
     const student = await Student.findOne({ _id: id, createdBy: req.user.id });
@@ -31,7 +31,7 @@ export const addPayment = async (req, res) => {
       description,
       createdBy: req.user.id,
     });
-    console.log(payment)
+    // console.log(payment)
     await payment.save();
     res.status(201).json(payment);
   } catch (error) {

@@ -6,9 +6,9 @@ import authMiddleware from '../middleware/authMiddleware.js';
 const router = express.Router();
 
 // Get all payments for a student
-router.get('/:id', authMiddleware, getPaymentsByStudent);
+router.get('/:id/history', authMiddleware, getPaymentsByStudent);
 
 // Add a payment for a student
-router.post('/:id', authMiddleware, addPayment);
+router.post('/:id/add', authMiddleware, addPayment);
 
 export default router;
