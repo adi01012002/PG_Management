@@ -10,5 +10,6 @@ router.get('/:id/history', authMiddleware, getPaymentsByStudent);
 
 // Add a payment for a student
 router.post('/:id/add', authMiddleware, addPayment);
+// router.post('/:id/add-payment', authMiddleware, addPayment);
 
 export default router;

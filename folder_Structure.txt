@@ -33,6 +33,7 @@ frontend/
 ├── .env                           # Environment variables for API URL (if required)
 ├── styles/                        # CSS files for styling
 │   ├── HomePage.css               # Styles for Home Page
+|   ├── AuthForm.js                # Styles for AuthForm
 │   ├── Dashboard.css              # Styles for Dashboard
 │   ├── LoginPage.css              # Styles for Login Page
 │   ├── RegisterPage.css           # Styles for Registration Page

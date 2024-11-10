@@ -1,12 +1,22 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import cors from 'cors';
 import bodyParser from "body-parser";
 import authRoutes from "./routes/authRoutes.js";
 import studentRoutes from "./routes/studentRoutes.js"; 
 import paymentRoutes from './routes/paymentRoutes.js';
 const app = express();
 dotenv.config();
+
+
+// Use CORS to allow requests from your frontend
+const corsOptions = {
+  origin: 'http://localhost:5173', // Replace with frontend URL in production
+  optionsSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
+
 
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));

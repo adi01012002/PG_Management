@@ -1,0 +1,55 @@
+import { addStudent ,fetchStudents} from '../../services/studentService';
+// import { useNavigate } from 'react-router-dom';
+export const addStudentAction = (studentData) => async (dispatch) => {
+    dispatch({ type: 'ADD_STUDENT_REQUEST' });
+    
+    try {
+        // const navigate = useNavigate();  // useNavigate hook
+        const data = await addStudent(studentData);
+        dispatch({ type: 'ADD_STUDENT_SUCCESS', payload: data.student });
+    } catch (error) {
+        dispatch({ type: 'ADD_STUDENT_FAILURE', payload: error.message });
+    }
+};
+
+
+// export const fetchStudentsAction = () => async (dispatch) => {
+//     dispatch({ type: 'FETCH_STUDENTS_REQUEST'});
+//     try {
+//       const data = await fetchStudents();
+//       dispatch({ type: 'FETCH_STUDENTS_SUCCESS', payload: data });
+//     } catch (error) {
+//       dispatch({ type: 'FETCH_STUDENTS_FAIL', payload: error.message });
+//     }
+//   };
+
+  // redux/actions/studentActions.js
+export const fetchStudentsAction = () => async (dispatch) => {
+    dispatch({ type: 'FETCH_STUDENTS_REQUEST'});
+    try {
+        const response = await fetchStudents(); // Call the service function
+        console.log(response)
+        console.log(response.data)
+
+        // dispatch({ type: 'FETCH_STUDENTS_SUCCESS', payload: data.data });
+        dispatch({ type: 'FETCH_STUDENTS_SUCCESS', payload: response });
+
+    } catch (error) {
+        dispatch({ type: 'FETCH_STUDENTS_FAIL', payload: error.message });
+    }
+};
+
+import { fetchStudentByIdService } from '../../services/studentService';
+
+// Action to fetch a student by ID
+export const fetchStudentByIdAction = (id) => async (dispatch) => {
+    dispatch({ type: 'FETCH_STUDENT_BY_ID_REQUEST' });
+
+    try {
+        const student = await fetchStudentByIdService(id);
+        console.log(student)
+        dispatch({ type: 'FETCH_STUDENT_BY_ID_SUCCESS', payload: student });
+    } catch (error) {
+        dispatch({ type: 'FETCH_STUDENT_BY_ID_FAILURE', payload: error.message });
+    }
+};
