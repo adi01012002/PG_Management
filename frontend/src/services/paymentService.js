@@ -20,3 +20,16 @@ export const addPaymentService = async (studentId, paymentData) => {
     throw error.response ? error.response.data : new Error("Network error");
   }
 };
+
+
+export const fetchPaymentHistory = async () => {
+  const token = localStorage.getItem('token');
+  if (!token) throw new Error('No token found');
+  
+  const config = { headers: { Authorization: `Bearer ${token}` } };
+  const response = await axios.get(`${BASE_URL}/payments/history`, config);
+
+  console.log(response)
+  console.log(response.data)
+  return response.data;
+};

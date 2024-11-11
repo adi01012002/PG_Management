@@ -69,7 +69,7 @@ const Dashboard = () => {
         <button onClick={() => handleNavigation("/students")}>
           Show All Students
         </button>
-        <button onClick={() => handleNavigation("/payment-history")}>
+        <button onClick={() => handleNavigation("/auth/payment-history")}>
           My Payment History
         </button>
       {/* </div> */}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector  } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import { addPaymentAction } from '../redux/actions/paymentActions';  // Define this action in your actions
 
@@ -14,6 +14,7 @@ const AddPayment = () => {
         type: '',
         description: ''
     });
+    const { loading, error } = useSelector((state) => state.payments);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -28,7 +29,9 @@ const AddPayment = () => {
 
     return (
         <div>
-            <h2>Add Payment for Student</h2>
+           <h2>Add Payment for Student</h2>
+            {loading && <p>Adding payment...</p>}
+            {error && <p>Error: {error}</p>}
             <form onSubmit={handleSubmit}>
                 <label>
                     Amount:

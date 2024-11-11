@@ -136,6 +136,7 @@ import { fetchStudentsAction } from '../redux/actions/studentActions';
 // import { useHistory } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
+
 const StudentList = () => {
     const dispatch = useDispatch();
     // const history = useHistory();
@@ -150,12 +151,19 @@ const StudentList = () => {
         // history.push(`/student/${id}`);
 navigate(`/student/${id}`);
     };
+    // Function to navigate to other pages
+const handleNavigation = (path) => {
+    navigate(path);
+};
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>{error}</p>;
 
     return (
         <div>
+        <button onClick={() => handleNavigation("/auth/dashboard")}>
+            Go To Dashboard
+        </button>
             <h2>Student List</h2>
             {students.length === 0 ? (
                 <p>No students found</p>

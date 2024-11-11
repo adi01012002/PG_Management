@@ -1,6 +1,7 @@
 // actions/paymentActions.js
 import { addPaymentService } from '../../services/paymentService';
 
+import { fetchPaymentHistory } from '../../services/paymentService';
 
 export const addPaymentAction = (studentId, paymentData) => async (dispatch) => {
     dispatch({ type: 'ADD_PAYMENT_REQUEST' });
@@ -12,3 +13,21 @@ export const addPaymentAction = (studentId, paymentData) => async (dispatch) => 
         dispatch({ type: 'ADD_PAYMENT_FAILURE', payload: error.message });
     }
 };
+
+
+// actions/paymentActions.js
+
+export const fetchPaymentHistoryAction = () => async (dispatch) => {
+  dispatch({ type: 'FETCH_PAYMENT_HISTORY_REQUEST' });
+  try {
+    const payments = await fetchPaymentHistory();
+    dispatch({ type: 'FETCH_PAYMENT_HISTORY_SUCCESS', payload: payments });
+  } catch (error) {
+    dispatch({ type: 'FETCH_PAYMENT_HISTORY_FAILURE', payload: error.message });
+  }
+};
+
+
+
+
+

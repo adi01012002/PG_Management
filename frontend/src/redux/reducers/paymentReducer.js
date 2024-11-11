@@ -16,9 +16,27 @@ const paymentReducer = (state = initialState, action) => {
             // return newState
         case 'ADD_PAYMENT_FAILURE':
             return { ...state, loading: false, error: action.payload };
+         // Handle fetching payment history
+        case 'FETCH_PAYMENT_HISTORY_REQUEST':
+            return { ...state, loading: true, error: null };
+        case 'FETCH_PAYMENT_HISTORY_SUCCESS':
+            return { ...state, loading: false, payments: action.payload };
+        case 'FETCH_PAYMENT_HISTORY_FAILURE':
+            return { ...state, loading: false, error: action.payload };
         default:
             return state;
     }
 };
 
 export default paymentReducer;
+
+
+
+
+
+
+
+
+
+
+

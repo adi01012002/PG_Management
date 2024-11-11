@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { addStudentAction } from '../redux/actions/studentActions';
 
 const StudentForm = () => {
@@ -11,6 +12,7 @@ const StudentForm = () => {
         year: ''
     });
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { loading, error } = useSelector((state) => state.students);
 
     const handleChange = (e) => {
@@ -20,8 +22,15 @@ const StudentForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(addStudentAction(formData));
+        navigate(`/auth/dashboard`);  // Redirect back to the dashboard page
     };
 
+
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     dispatch(addPaymentAction(id, paymentDetails));
+    //     navigate(`/student/${id}`);  // Redirect back to the student details page
+    // };
     return (
         <form onSubmit={handleSubmit}>
             <input type="text" name="name" placeholder="Name" value={formData.name} onChange={handleChange} required />

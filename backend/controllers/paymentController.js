@@ -38,3 +38,20 @@ export const addPayment = async (req, res) => {
     res.status(500).json({ message: "Error adding payment", error: error.message });
   }
 };
+
+export const getPaymentsByUser = async (req, res) => {
+  try {
+    // Find payments created by the logged-in user
+    const payments = await Payment.find({ createdBy: req.user.id })
+      .populate({
+        path: 'id', // assuming `studentId` is the reference field in Payment schema
+        select: 'name', // only include the name of the student
+      });
+
+    if (!payments) return res.status(404).json({ message: "No payments found for this user" });
+
+    res.status(200).json(payments);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching payments", error: error.message });
+  }
+};
