@@ -1,4 +1,4 @@
-import { addStudent ,fetchStudents} from '../../services/studentService';
+import { addStudent ,fetchStudents,deleteStudent} from '../../services/studentService';
 // import { useNavigate } from 'react-router-dom';
 export const addStudentAction = (studentData) => async (dispatch) => {
     dispatch({ type: 'ADD_STUDENT_REQUEST' });
@@ -52,4 +52,21 @@ export const fetchStudentByIdAction = (id) => async (dispatch) => {
     } catch (error) {
         dispatch({ type: 'FETCH_STUDENT_BY_ID_FAILURE', payload: error.message });
     }
+};
+
+// redux/actions/studentActions.js
+
+
+export const deleteStudentAction = (id) => async (dispatch) => {
+  dispatch({ type: 'DELETE_STUDENT_REQUEST' });
+  try {
+    // const token = localStorage.getItem('token');
+    // const config = { headers: { Authorization: `Bearer ${token}` } };
+    // await axios.delete(`http://localhost:8090/students/${studentId}`, config);
+    await deleteStudent(id);
+    
+    dispatch({ type: 'DELETE_STUDENT_SUCCESS', payload: id });
+  } catch (error) {
+    dispatch({ type: 'DELETE_STUDENT_FAILURE', payload: error.message });
+  }
 };

@@ -11,6 +11,7 @@ import StudentList from "./components/StudentList";
 import StudentDetails from "./components/StudentDetails";
 import AddPayment from "./components/AddPayment";
 import PaymentHistory from "./components/PaymentHistory";
+import StudentPayment from "./components/StudentPayment";
 
 const App = () => {
   const navigate = useNavigate(); // Initialize useNavigate
@@ -49,6 +50,7 @@ const App = () => {
         <Route path="/student/:id" element={<StudentDetails/>} />
         <Route path="/students/:id/add-payment" element={<AddPayment/>} />
         <Route path="/auth/payment-history" element={<PaymentHistory/>} />
+        <Route path="/students/:id/payment-history" element={<StudentPayment/>} />
         </Routes>
     
    

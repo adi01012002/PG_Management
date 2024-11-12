@@ -79,7 +79,7 @@ const PaymentHistory = () => {
             {payments.length > 0 ? (
                 payments.map((payment) => (
                     <div key={payment._id} className="payment-card">
-                        <center><h3>Student Name: {payment.id.name}</h3></center>
+                        <center><h3>Student Name: {payment.id?.name}</h3></center>
                         <p>Amount: {payment.amount} Rs</p>
                         <p>Date: {new Date(payment.date).toLocaleDateString()}</p>
                         <p>Type: {payment.type}</p>

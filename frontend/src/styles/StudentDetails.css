@@ -1,0 +1,119 @@
+/* StudentDetails.css */
+
+/* Ensure the container takes full height of the viewport */
+.student-details-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Vertically center the content */
+    align-items: center; /* Horizontally center the content */
+    min-height: 100vh; /* Ensure the container takes full height of the screen */
+    padding: 20px;
+    background-color: #f7f7f7; /* Optional: Background color for the whole page */
+}
+
+.student-card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px; /* Maximum width of the card */
+    margin-top: 20px;
+    text-align: center;
+}
+
+.student-card h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.student-card p {
+    font-size: 1.1rem;
+    margin: 5px 0;
+}
+
+.student-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.action-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.action-button:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.delete-button {
+    background-color: #ff4d4d;
+}
+
+.delete-button:hover {
+    background-color: #ff3333;
+}
+
+.back-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    .student-card {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .student-card h2 {
+        font-size: 1.8rem;
+    }
+
+    .student-card p {
+        font-size: 1rem;
+    }
+
+    .action-button {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .student-card {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .student-card h2 {
+        font-size: 1.6rem;
+    }
+
+    .student-card p {
+        font-size: 0.9rem;
+    }
+
+    .action-button {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+    }
+}

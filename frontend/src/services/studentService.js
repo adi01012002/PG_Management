@@ -115,3 +115,14 @@ export const fetchStudentByIdService = async (id) => {
     
     return response.data; // Return the student's data
 };
+
+
+export const deleteStudent=async (id)=>{
+  // Retrive token from local Storage 
+  const token=localStorage.getItem("token");
+  if (!token) throw new Error("No token found");
+  const config ={headers:{Authorization:`Bearer ${token}`}};
+  const response =await axios.delete(`${BASE_URL}/students/${id}`,config);
+  alert("Student deleted successfully!");
+  return response.data;
+}

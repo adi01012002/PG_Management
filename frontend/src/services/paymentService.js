@@ -33,3 +33,16 @@ export const fetchPaymentHistory = async () => {
   console.log(response.data)
   return response.data;
 };
+
+
+
+export const fetchStudentPayments = async (studentId) => {
+    console.log(studentId)
+    const token = localStorage.getItem('token');
+    if (!token) throw new Error("No token found");
+    const config = { headers: { Authorization: `Bearer ${token}` } };
+    const response = await axios.get(`${BASE_URL}/payments/${studentId}/history`, config);
+    return response.data;
+};
+
+//http://localhost:8090/payments/student/6732112bb88a98334e73e770
