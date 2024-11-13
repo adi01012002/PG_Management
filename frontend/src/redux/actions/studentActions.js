@@ -1,4 +1,4 @@
-import { addStudent ,fetchStudents,deleteStudent} from '../../services/studentService';
+import { addStudent ,fetchStudents,deleteStudent,updateStudent} from '../../services/studentService';
 // import { useNavigate } from 'react-router-dom';
 export const addStudentAction = (studentData) => async (dispatch) => {
     dispatch({ type: 'ADD_STUDENT_REQUEST' });
@@ -69,4 +69,19 @@ export const deleteStudentAction = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({ type: 'DELETE_STUDENT_FAILURE', payload: error.message });
   }
+};
+
+
+// Action to update an existing student
+export const updateStudentAction = (id, updatedData) => async (dispatch) => {
+    try {
+        dispatch({ type: "UPDATE_STUDENT_REQUEST" });
+        const data = await updateStudent(id, updatedData);
+        dispatch({ type: "UPDATE_STUDENT_SUCCESS", payload: data });
+    } catch (error) {
+        dispatch({
+            type: "UPDATE_STUDENT_FAILURE",
+            payload: error.response?.data?.message || error.message,
+        });
+    }
 };

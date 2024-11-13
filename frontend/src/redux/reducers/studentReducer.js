@@ -50,6 +50,12 @@ const studentReducer = (state = initialState, action) => {
       };
     case "DELETE_STUDENT_FAILURE":
       return { ...state, loading: false, error: action.payload };
+    case "UPDATE_STUDENT_REQUEST":
+      return { ...state, loading: true, error: null };
+    case "UPDATE_STUDENT_SUCCESS":
+      return { ...state, loading: false, student: action.payload, error: null };
+    case "UPDATE_STUDENT_FAILURE":
+      return { ...state, loading: false, error: action.payload };
     default:
       return state;
   }

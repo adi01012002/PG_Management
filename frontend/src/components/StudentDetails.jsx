@@ -65,7 +65,8 @@ const StudentDetails = () => {
     }, [dispatch, id]);
 
     const handleUpdateClick = () => {
-        console.log('Update Student:', student);
+        // console.log('Update Student:', student);
+        navigate(`/students/${student._id}/edit`, { state: { student } });
         // Add functionality here to update student
     };
 
@@ -74,7 +75,7 @@ const StudentDetails = () => {
 
         // Add functionality here to delete student
         dispatch(deleteStudentAction(student._id));
-        navigate('/auth/dashboard');
+        navigate('/students');
     };
 
     // const handlePaymentClick = () => {

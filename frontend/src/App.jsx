@@ -46,6 +46,7 @@ const App = () => {
         <Route path="/login" element={<LoginPage onSubmit={handleLogin} />} />
         <Route path="/register" element={<RegisterPage onSubmit={handleRegister}/>} />
         <Route path="/add-student" element={<StudentForm/>} />
+        <Route path="/students/:id/edit" element={<StudentForm />} />
         <Route path="/students" element={<StudentList/>} />
         <Route path="/student/:id" element={<StudentDetails/>} />
         <Route path="/students/:id/add-payment" element={<AddPayment/>} />

@@ -126,3 +126,14 @@ export const deleteStudent=async (id)=>{
   alert("Student deleted successfully!");
   return response.data;
 }
+
+
+
+export const updateStudent = async (id, updatedData) => {
+    // Retrive token from local Storage 
+    const token=localStorage.getItem("token");
+    if (!token) throw new Error("No token found");
+    const config ={headers:{Authorization:`Bearer ${token}`}};
+  const { data } = await axios.put(`${BASE_URL}/students/edit/${id}`, updatedData,config);
+  return data;
+};
