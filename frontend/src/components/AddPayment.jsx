@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector  } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import { addPaymentAction } from '../redux/actions/paymentActions';  // Define this action in your actions
-
+import '../styles/AddPayment.css';
 const AddPayment = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
@@ -32,7 +32,7 @@ const AddPayment = () => {
            <h2>Add Payment for Student</h2>
             {loading && <p>Adding payment...</p>}
             {error && <p>Error: {error}</p>}
-            <form onSubmit={handleSubmit}>
+            <form className="form-container" onSubmit={handleSubmit}>
                 <label>
                     Amount:
                     <input type="number" name="amount" value={paymentDetails.amount} onChange={handleChange} required />

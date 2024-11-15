@@ -1,10 +1,10 @@
 // models/paymentModel.js
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const paymentSchema = new mongoose.Schema({
   id: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Student',
+    ref: "Student",
     required: true,
   },
   amount: {
@@ -17,18 +17,19 @@ const paymentSchema = new mongoose.Schema({
   },
   type: {
     type: String,
-    enum: ['cash', 'card', 'online', 'other'],
+    enum: ["cash", "card", "online", "paytam", "check", "other"],
     required: true,
   },
   description: {
     type: String,
-    default: '',
+    default: "",
   },
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    ref: "User",
     required: true,
   },
 });
 
-export default mongoose.model('Payment', paymentSchema);
+const payment = mongoose.model("Payment", paymentSchema);
+export default payment;

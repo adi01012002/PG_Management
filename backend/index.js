@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import cors from 'cors';
 import bodyParser from "body-parser";
 import authRoutes from "./routes/authRoutes.js";
+import pgRoutes from "./routes/pgRoutes.js";
 import studentRoutes from "./routes/studentRoutes.js"; 
 import paymentRoutes from './routes/paymentRoutes.js';
 const app = express();
@@ -26,6 +27,7 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use("/auth", authRoutes);       // Authentication routes
 app.use("/students", studentRoutes); // Student routes
 app.use('/payments', paymentRoutes); // Payment routes
+app.use('/pg', pgRoutes); // pg routes
 // app.get("/", (req, res) => {
 //   res.send("Hello World");
 // });

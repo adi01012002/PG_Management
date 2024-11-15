@@ -12,6 +12,8 @@ import StudentDetails from "./components/StudentDetails";
 import AddPayment from "./components/AddPayment";
 import PaymentHistory from "./components/PaymentHistory";
 import StudentPayment from "./components/StudentPayment";
+import PgRegistrationForm from "./components/PgRegistrationForm";
+import PgData from "./components/pgData";
 
 const App = () => {
   const navigate = useNavigate(); // Initialize useNavigate
@@ -52,6 +54,9 @@ const App = () => {
         <Route path="/students/:id/add-payment" element={<AddPayment/>} />
         <Route path="/auth/payment-history" element={<PaymentHistory/>} />
         <Route path="/students/:id/payment-history" element={<StudentPayment/>} />
+        <Route path="/auth/register-pg" element={<PgRegistrationForm/>} />
+        <Route path="/auth/pg-status" element={<PgData/>} />
+
         </Routes>
     
    

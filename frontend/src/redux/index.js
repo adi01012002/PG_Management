@@ -2,9 +2,9 @@
 import { combineReducers } from 'redux';
 // import thunk from 'redux-thunk';
 // import { composeWithDevTools } from 'redux-devtools-extension';
-import studentReducer from './reducers/studentReducer';
-
 // Import your reducers
+import studentReducer from './reducers/studentReducer';
+import pgReducer  from './reducers/pgReducer';
 import authReducer from './reducers/authReducers.js';
 import paymentReducer from './reducers/paymentReducer.js';
 
@@ -12,7 +12,8 @@ import paymentReducer from './reducers/paymentReducer.js';
 const rootReducer = combineReducers({
     auth: authReducer,
     students: studentReducer,
-    payments:paymentReducer
+    payments:paymentReducer,
+    pg: pgReducer,
 });
 
 // export default combineReducers({

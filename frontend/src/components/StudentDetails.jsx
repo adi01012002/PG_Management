@@ -103,8 +103,8 @@ const handleAddPaymentClick = () => {
     return (
         <>
         <div className="student-details-container">
-        <button className="back-button" onClick={() => handleNavigation("/auth/dashboard")}>
-            Go To Dashboard
+        <button className="back-button" onClick={() => handleNavigation("/students")}>
+            Go To Students
         </button>
         </div>
         <div className="student-card">

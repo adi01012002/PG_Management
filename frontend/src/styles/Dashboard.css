@@ -1,80 +1,58 @@
-/* Dashboard.css */
-
+/* Container for the entire dashboard */
 .dashboard-container {
-    display: flex; /* Use flexbox for layout */
-    flex-direction: column; /* Stack elements vertically */
-    align-items: center; /* Center horizontally */
-    justify-content: center; /* Center vertically */
-    padding: 40px; /* Padding around the container */
-    background-color: #f8f9fa; /* Light background color */
-    height: 100vh; /* Full height of the viewport */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
-    font-size: 2.5rem; /* Font size for main heading */
-    color: #333; /* Darker color for headings */
-    text-align: center; /* Center the heading text */
-    margin-bottom: 10px; /* Space below the heading */
-}
-
-p {
-    font-size: 1.2rem; /* Font size for welcome message */
-    color: #666; /* Lighter color for subtext */
-    text-align: center; /* Center the text */
-    margin-bottom: 20px; /* Space below the welcome message */
+/* Title and welcome message styling */
+.dashboard-container h1 {
+  font-size: 2em;
+  color: #333;
+  margin-bottom: 10px;
 }
 
 .welcome-message {
-    font-weight: bold; /* Make welcome message bold */
-    font-size: 1.5rem; /* Increase size for emphasis */
-    margin-bottom: 30px; /* Space below the welcome message */
+  font-size: 1.2em;
+  color: #3B1C32;
+  margin-bottom: 20px;
 }
 
-button {
-    padding: 12px 20px; /* Padding for buttons */
-    margin: 10px; /* Margin for spacing between buttons */
-    border: none; /* No border */
-    border-radius: 5px; /* Rounded corners */
-    background-color: #007BFF; /* Button background color */
-    color: white; /* Text color for buttons */
-    cursor: pointer; /* Pointer cursor on hover */
-    font-size: 1rem; /* Font size for buttons */
-    transition: background-color 0.3s, transform 0.2s; /* Smooth transition for hover effect */
-}
-
-button:hover {
-    background-color: #0056b3; /* Darker shade on hover */
-    transform: translateY(-2px); /* Lift effect on hover */
-}
-
+/* Button container to align buttons in a row */
 .dashboard-actions {
-    display: flex; /* Use flexbox for button layout */
-    flex-wrap: wrap; /* Allow buttons to wrap to next line */
-    justify-content: center; /* Center buttons */
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 20px;
 }
 
-@media (min-width: 768px) {
-    .dashboard-actions {
-        justify-content: space-around; /* Space out buttons evenly */
-        width: 100%; /* Full width for actions on larger screens */
-    }
-
-    button {
-        width: 150px; /* Fixed width for buttons */
-    }
+/* Button styling */
+.dashboard-container button {
+  padding: 10px 20px;
+  font-size: 1em;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 180px;
+  transition: background-color 0.3s;
 }
 
-@media (max-width: 600px) {
-    h1 {
-        font-size: 2rem; /* Reduce heading size on small screens */
-    }
+.dashboard-container button:hover {
+  background-color: #0056b3;
+}
 
-    p {
-        font-size: 1rem; /* Reduce welcome message size on small screens */
-    }
+/* Logout button styling (optional) */
+.dashboard-container .logout-button {
+  background-color: #dc3545;
+}
 
-    button {
-        width: 100%; /* Full width buttons on small screens */
-    }
+.dashboard-container .logout-button:hover {
+  background-color: #c82333;
 }

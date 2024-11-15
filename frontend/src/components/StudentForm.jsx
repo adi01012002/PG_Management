@@ -101,7 +101,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { addStudentAction, updateStudentAction, fetchStudentByIdAction } from '../redux/actions/studentActions';
-
+import '../styles/StudentForm.css'; // Import the CSS file
 const StudentForm = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
@@ -155,9 +155,9 @@ const StudentForm = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className="form-container"  onSubmit={handleSubmit}>
             <input type="text" name="name" placeholder="Name" value={formData.name} onChange={handleChange} required />
-            <input type="number" name="age" placeholder="Age" value={formData.age} onChange={handleChange} required />
+            <input className="age" type="number" name="age" placeholder="Age" value={formData.age} onChange={handleChange} required />
             <input type="text" name="address" placeholder="Address" value={formData.address} onChange={handleChange} required />
             <input type="text" name="phoneNumber" placeholder="Phone Number" value={formData.phoneNumber} onChange={handleChange} required />
             <input type="text" name="year" placeholder="Year" value={formData.year} onChange={handleChange} required />
