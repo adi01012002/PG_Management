@@ -65,7 +65,7 @@ const Dashboard = () => {
       <p>PG Management System!</p>
       <button onClick={handleLogout}>Logout</button>
       <h1 className="welcome-message">Welcome to your Dashboard, {user?.username || "PG Owner"}!</h1>
-      {/* <div className="dashboard-actions"> */}
+      <div className="dashboard-actions">
         <button onClick={() => handleNavigation("/add-student")}>
           Add Student
         </button>{" "}
@@ -81,7 +81,7 @@ const Dashboard = () => {
         <button onClick={() => handleNavigation("/auth/pg-status")}>
           My Pg Status
         </button>
-      {/* </div> */}
+      </div>
     </div>
   );
 };

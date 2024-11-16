@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-
+import Payment from './paymentModel.js'; // Import Payment model
 const studentSchema = new mongoose.Schema({
     name: { type: String, required: true },
     age: { type: Number, required: true },
@@ -9,6 +9,13 @@ const studentSchema = new mongoose.Schema({
     createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }
 });
 
+
+
+studentSchema.pre('remove', async function (next) {
+    // Delete associated payments before removing the student
+    await Payment.deleteMany({ id: this._id });
+    next();
+});
 
 
 

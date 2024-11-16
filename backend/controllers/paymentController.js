@@ -121,12 +121,28 @@ export const addPayment = async (req, res) => {
 
 export const getPaymentsByUser = async (req, res) => {
   try {
+
+    const userId = req.user.id;
+
+    // Fetch all students created by the user
+    const students = await Student.find({ createdBy: userId });
+    const studentIds = students.map((student) => student.id);
     // Find payments created by the logged-in user
-    const payments = await Payment.find({ createdBy: req.user.id })
+    const payments = await Payment.find({id: { $in: studentIds }, createdBy: req.user.id })
       .populate({
         path: 'id', // assuming `studentId` is the reference field in Payment schema
         select: 'name', // only include the name of the student
       }).sort({ date: -1 });
+       
+ // Fetch payments only for existing students
+//  console.log(studentIds,id)
+//  const payments = await Payment.find({ id: { $in: studentIds }, createdBy: userId })
+//  .populate({
+//       path: 'id', // assuming `studentId` is the reference field in Payment schema
+//       select: 'name', // only include the name of the student
+//     }).sort({ date: -1 });
+
+
 
     if (!payments) return res.status(404).json({ message: "No payments found for this user" });
 

@@ -8,7 +8,6 @@ export const registerUser = (userData) => async (dispatch) => {
         console.log("Register Success:", data);
         dispatch({ type: 'REGISTER_SUCCESS', payload: data });
         console.log(data.token);
-        console.log("data");
         localStorage.setItem('token', data.token);
 
     } catch (error) {

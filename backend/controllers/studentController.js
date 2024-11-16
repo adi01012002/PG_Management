@@ -23,7 +23,7 @@
 
 import Student from "../models/studentModel.js";
 import PG from "../models/PgModel.js";
-// import Payment from '../models/paymentModel.js'; // Import your Payment model
+import Payment from '../models/paymentModel.js'; // Import your Payment model
 // add student
 export const addStudent = async (req, res) => {
   try {
@@ -104,7 +104,11 @@ export const deleteStudent = async (req, res) => {
 
     /////////////////////////////////////////////////////
     // Delete payments associated with the student
-    // await Payment.deleteMany({ studentId: id });
+    // console.log(student._id)
+    // console.log(id)
+    // console.log(student.id)
+    await Payment.deleteMany({ id: student._id });
+
 
     /////////////////////////////////////////////////////
     //   await student.remove();
@@ -125,7 +129,7 @@ export const deleteStudent = async (req, res) => {
     pg.availableBeds += 1;
     pg.availableRooms += 1;
 
-    await pg.save();
+    await pg.save();;
 
     res.status(200).json({ message: "Student deleted successfully" });
   } catch (error) {

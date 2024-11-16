@@ -1,33 +1,31 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import cors from 'cors';
+import cors from "cors";
 import bodyParser from "body-parser";
 import authRoutes from "./routes/authRoutes.js";
 import pgRoutes from "./routes/pgRoutes.js";
-import studentRoutes from "./routes/studentRoutes.js"; 
-import paymentRoutes from './routes/paymentRoutes.js';
+import studentRoutes from "./routes/studentRoutes.js";
+import paymentRoutes from "./routes/paymentRoutes.js";
 const app = express();
 dotenv.config();
 
-
 // Use CORS to allow requests from your frontend
 const corsOptions = {
-  origin: 'http://localhost:5173', // Replace with frontend URL in production
+  origin: "http://localhost:5173", // Replace with frontend URL in production
   optionsSuccessStatus: 200,
+  credentials: true,
 };
 app.use(cors(corsOptions));
-
 
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 
-
 // Routes
-app.use("/auth", authRoutes);       // Authentication routes
+app.use("/auth", authRoutes); // Authentication routes
 app.use("/students", studentRoutes); // Student routes
-app.use('/payments', paymentRoutes); // Payment routes
-app.use('/pg', pgRoutes); // pg routes
+app.use("/payments", paymentRoutes); // Payment routes
+app.use("/pg", pgRoutes); // pg routes
 // app.get("/", (req, res) => {
 //   res.send("Hello World");
 // });
@@ -35,7 +33,9 @@ app.listen(8090, () => {
   console.log("server is running on 8090");
 });
 
-mongoose.connect("mongodb+srv://aditya10462004:Q6DTBofGd9fWHDFh@cluster0.e6ud1.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0");
+mongoose.connect(
+  "mongodb+srv://aditya10462004:Q6DTBofGd9fWHDFh@cluster0.e6ud1.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+);
 
 const db = mongoose.connection;
 db.on("error", (err) => {
@@ -55,10 +55,6 @@ db.on("open", () => {
 //   )
 //   .catch((error) => console.log(error.message));
 
-
-
-
-
 // MONGODB_URL=mongodb+srv://aditya10462004:Q6DTBofGd9fWHDFh@cluster0.e6ud1.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
 
 // these are two user of this application
@@ -66,7 +62,6 @@ db.on("open", () => {
 // "username": "adi",
 // "email": "adi01@gmail.com",
 // "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MjNmOWM5N2YyOGMzZGY2ZTQxZDNiYyIsImlhdCI6MTczMDQxMDk1NCwiZXhwIjoxNzMzMDAyOTU0fQ.YxK41nUiWXi-Qinks8FubGRHAhIRe-q7iO432W693QU"
-
 
 // "_id": "6724df75dfb2ca2b3911b865",
 // "username": "rishu01",
