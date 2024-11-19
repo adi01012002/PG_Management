@@ -97,41 +97,207 @@
 
 
 
+// import React, { useState, useEffect } from 'react';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { useNavigate, useParams } from 'react-router-dom';
+// import { addStudentAction, updateStudentAction, fetchStudentByIdAction } from '../redux/actions/studentActions';
+// import '../styles/StudentForm.css'; // Import the CSS file
+// const StudentForm = () => {
+//     const { id } = useParams();
+//     const dispatch = useDispatch();
+//     const navigate = useNavigate();
+//     const { student, loading, error } = useSelector((state) => state.students);
+    
+//     const [formData, setFormData] = useState({
+//         username: '',
+//         age: '',
+//         address: '',
+//         phone: '',
+//         year: '',
+//         email:'',
+//         password:'',
+//     });
+
+//     // Fetch student details if editing
+//     useEffect(() => {
+//         if (id) {
+//             dispatch(fetchStudentByIdAction(id));
+//         }
+//     }, [dispatch, id]);
+
+//     // Populate form with existing data when in edit mode
+//     useEffect(() => {
+//         if (student && id) {
+//             setFormData({
+//                 username: student.username,
+//                 age: student.age,
+//                 address: student.address,
+//                 phone: student.phone,
+//                 year: student.year,
+//                 email:student.email,
+//                 password:student.password,
+//             });
+//         }
+//     }, [student, id]);
+
+
+//      // Pre-fill form data if studentData exists (update mode)
+// //   useEffect(() => {
+// //     if (formData) {
+// //       setFormData({ ...formData });
+// //     }
+// //   }, [formData]);
+
+//     const handleChange = (e) => {
+//         setFormData({ ...formData, [e.target.name]: e.target.value });
+//     };
+
+//     const handleSubmit = (e) => {
+//         e.preventDefault();
+//         if (id) {
+//             // Dispatch update action if editing
+//             dispatch(updateStudentAction(id, formData));
+//             navigate(`/student/${id}`);
+//         } else {
+//             // Dispatch add action if creating new student
+//             dispatch(addStudentAction(formData));
+//             navigate(`/auth/dashboard`);
+            
+//         }
+//     };
+
+// //     return (
+// //         <form className="form-container"  onSubmit={handleSubmit}>
+// //             <input type="text" name="name" placeholder="Name" value={formData.name} onChange={handleChange} required />
+// //             <input className="age" type="number" name="age" placeholder="Age" value={formData.age} onChange={handleChange} required />
+// //             <input type="text" name="address" placeholder="Address" value={formData.address} onChange={handleChange} required />
+// //             <input type="text" name="phoneNumber" placeholder="Phone Number" value={formData.phoneNumber} onChange={handleChange} required />
+// //             <input type="text" name="year" placeholder="Year" value={formData.year} onChange={handleChange} required />
+// //             <button type="submit" disabled={loading}>{id ? 'Update Student' : 'Add Student'}</button>
+// //             {error && <p>{error}</p>}
+// //         </form>
+// //     );
+// // };
+
+// // export default StudentForm;
+
+// return (
+//     <div>
+//       <h2>Add Student</h2>
+//       {/* {error && <p style={{ color: "red" }}>{error}</p>}
+//       {success && <p style={{ color: "green" }}>Student added successfully!</p>} */}
+//       <form className="form-container" onSubmit={handleSubmit}>
+//         <label>Username</label>
+//         <input
+//           type="text"
+//           name="username"
+//           value={formData.username}
+//           onChange={handleChange}
+//           required
+//         />
+//         <label>Age</label>
+//         <input
+//           type="number"
+//           name="age"
+//           value={formData.age}
+//           onChange={handleChange}
+//           required
+//         />
+//         <label>Email</label>
+//         <input
+//           type="email"
+//           name="email"
+//           value={formData.email}
+//           onChange={handleChange}
+//           required
+//         />
+//         <label>Password</label>
+//         <input
+//           type="password"
+//           name="password"
+//           value={formData.password}
+//           onChange={handleChange}
+//           required
+//         />
+//         <label>Year</label>
+//         <input
+//           type="text"
+//           name="year"
+//           value={formData.year}
+//           onChange={handleChange}
+//           required
+//         />
+//         <label>Address</label>
+//         <input
+//           type="text"
+//           name="address"
+//           value={formData.address}
+//           onChange={handleChange}
+//           required
+//         />
+//         <label>Phone</label>
+//         <input
+//           type="text"
+//           name="phone"
+//           value={formData.phone}
+//           onChange={handleChange}
+//           required
+//         />
+//         {/* <button type="submit" disabled={loading}>
+//           {loading ? "Adding..." : "Add Student"}
+//         </button> */}
+//         <button type="submit" disabled={loading}>{id ? 'Update Student' : 'Add Student'}</button>
+//         {error && <p>{error}</p>}
+//       </form>
+//     </div>
+//   );
+// };
+
+// export default StudentForm;
+
+
+
+
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { addStudentAction, updateStudentAction, fetchStudentByIdAction } from '../redux/actions/studentActions';
 import '../styles/StudentForm.css'; // Import the CSS file
+
 const StudentForm = () => {
-    const { id } = useParams();
+    const { id } = useParams(); // Fetch student ID from URL
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { student, loading, error } = useSelector((state) => state.students);
-    
+
     const [formData, setFormData] = useState({
-        name: '',
+        username: '',
         age: '',
+        email: '',
         address: '',
-        phoneNumber: '',
-        year: ''
+        phone: '',
+        year: '',
+        password: '', // Only required for adding a student
     });
 
-    // Fetch student details if editing
+    // Fetch student details if editing (update mode)
     useEffect(() => {
         if (id) {
             dispatch(fetchStudentByIdAction(id));
         }
     }, [dispatch, id]);
 
-    // Populate form with existing data when in edit mode
+    // Populate form with existing student data in edit mode
     useEffect(() => {
         if (student && id) {
             setFormData({
-                name: student.name,
-                age: student.age,
-                address: student.address,
-                phoneNumber: student.phoneNumber,
-                year: student.year
+                username: student.username || '',
+                age: student.age || '',
+                email: student.email || '',
+                address: student.address || '',
+                phone: student.phone || '',
+                year: student.year || '',
+                password: '', // Do not populate password when editing
             });
         }
     }, [student, id]);
@@ -143,27 +309,86 @@ const StudentForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (id) {
-            // Dispatch update action if editing
+            // Dispatch update action for edit mode
             dispatch(updateStudentAction(id, formData));
             navigate(`/student/${id}`);
         } else {
-            // Dispatch add action if creating new student
+            // Dispatch add action for creating new student
             dispatch(addStudentAction(formData));
             navigate(`/auth/dashboard`);
-            
         }
     };
 
     return (
-        <form className="form-container"  onSubmit={handleSubmit}>
-            <input type="text" name="name" placeholder="Name" value={formData.name} onChange={handleChange} required />
-            <input className="age" type="number" name="age" placeholder="Age" value={formData.age} onChange={handleChange} required />
-            <input type="text" name="address" placeholder="Address" value={formData.address} onChange={handleChange} required />
-            <input type="text" name="phoneNumber" placeholder="Phone Number" value={formData.phoneNumber} onChange={handleChange} required />
-            <input type="text" name="year" placeholder="Year" value={formData.year} onChange={handleChange} required />
-            <button type="submit" disabled={loading}>{id ? 'Update Student' : 'Add Student'}</button>
-            {error && <p>{error}</p>}
-        </form>
+        <div className="student-form-container">
+            <h2>{id ? 'Update Student' : 'Add Student'}</h2>
+            {error && <p className="error-message">{error}</p>}
+            <form className="form-container" onSubmit={handleSubmit}>
+                <label>Username</label>
+                <input
+                    type="text"
+                    name="username"
+                    value={formData.username}
+                    onChange={handleChange}
+                    required
+                />
+                <label>Age</label>
+                <input
+                    type="number"
+                    name="age"
+                    value={formData.age}
+                    onChange={handleChange}
+                    required
+                />
+                <label>Email</label>
+                <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                />
+                {!id && ( // Show password field only in add mode
+                    <>
+                        <label>Password</label>
+                        <input
+                            type="password"
+                            name="password"
+                            value={formData.password}
+                            onChange={handleChange}
+                            required
+                        />
+                    </>
+                )}
+                <label>Year</label>
+                <input
+                    type="text"
+                    name="year"
+                    value={formData.year}
+                    onChange={handleChange}
+                    required
+                />
+                <label>Address</label>
+                <input
+                    type="text"
+                    name="address"
+                    value={formData.address}
+                    onChange={handleChange}
+                    required
+                />
+                <label>Phone</label>
+                <input
+                    type="text"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    required
+                />
+                <button type="submit" disabled={loading}>
+                    {loading ? (id ? 'Updating...' : 'Adding...') : id ? 'Update Student' : 'Add Student'}
+                </button>
+            </form>
+        </div>
     );
 };
 

@@ -14,10 +14,11 @@ const paymentSchema = new mongoose.Schema({
   date: {
     type: Date,
     required: true,
+    default: Date.now,
   },
   type: {
     type: String,
-    enum: ["cash", "card", "online", "paytam", "check", "other"],
+    enum: ["cash", "card", "online", "paytm", "check", "other"],
     required: true,
   },
   description: {

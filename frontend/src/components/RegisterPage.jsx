@@ -56,7 +56,7 @@ import '../styles/LoginPage.css';
 const RegisterPage = ({ onSubmit }) => {
   return (
     <div>
-      <h2>Register</h2>
+      {/* <h2>Register</h2> */}
       <AuthForm isLogin={false} onSubmit={onSubmit} />
     </div>
   );

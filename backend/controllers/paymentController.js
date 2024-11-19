@@ -131,7 +131,7 @@ export const getPaymentsByUser = async (req, res) => {
     const payments = await Payment.find({id: { $in: studentIds }, createdBy: req.user.id })
       .populate({
         path: 'id', // assuming `studentId` is the reference field in Payment schema
-        select: 'name', // only include the name of the student
+        select: 'username', // only include the name of the student
       }).sort({ date: -1 });
        
  // Fetch payments only for existing students

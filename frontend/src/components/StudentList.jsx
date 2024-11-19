@@ -170,7 +170,7 @@ const handleNavigation = (path) => {
             ) : (
                 students.map((student) => (
                     <div key={student._id} className="student-card">
-                        <p><strong>{student.name}</strong></p>
+                        <p><strong>{student.username}</strong></p>
                         <button onClick={() => handleViewMoreClick(student._id)}>View More Details</button>
                     </div>
                 ))

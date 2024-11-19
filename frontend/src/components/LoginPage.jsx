@@ -8,7 +8,7 @@ import '../styles/LoginPage.css';
 const LoginPage = ({ onSubmit }) => {
     return (
         <div className={"login-container"}>
-            <h2>Login</h2>
+            {/* <h2>Login</h2> */}
             <AuthForm isLogin={true} onSubmit={onSubmit} />
         </div>
     );
