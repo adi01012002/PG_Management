@@ -6,9 +6,6 @@ const initialState = {
 };
 
 const studentReducer = (state = initialState, action) => {
-  console.log(state);
-  console.log("Action:", action);
-  console.log("Current student State:", initialState.student);
   switch (action.type) {
     case "ADD_STUDENT_REQUEST":
       return { ...state, loading: true };

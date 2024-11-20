@@ -1,31 +1,9 @@
-// import Student from '../models/studentModel.js';
-// import { studentValidationSchema } from '../validations/studentValidation.js';
-
-// export const addStudent = async (req, res) => {
-//     const { error } = studentValidationSchema.validate(req.body);
-//     if (error) return res.status(400).json({ message: error.details[0].message });
-
-//     try {
-//         console.log(req.user._id)
-//         const newStudent = new Student({
-//             ...req.body,
-//             createdBy: req.user._id
-//         });
-
-//         await newStudent.save();
-//         res.status(201).json({ message: 'Student added successfully', student: newStudent });
-//     } catch (err) {
-//         res.status(500).json({ message: 'Failed to add student', error: err.message });
-//     }
-// };
-
-// // export default addStudent ;
-
 import Student from "../models/studentModel.js";
 import PG from "../models/PgModel.js";
 import Payment from "../models/paymentModel.js"; // Import your Payment model
 import User from "../models/userModel.js"; // User model for authentication
 import jwt from "jsonwebtoken";
+import mongoose from "mongoose";
 // Helper function to generate JWT token
 const generateToken = (id, role) => {
   return jwt.sign({ id, role }, process.env.JWT_SECRET, { expiresIn: "1d" });
@@ -76,14 +54,95 @@ const generateToken = (id, role) => {
 //   }
 // };
 
+// export const addStudent = async (req, res) => {
+//   try {
+//     // `req.user` contains the user ID of the PG owner (set by the auth middleware)
+//     const ownerId = req.user.id;
+//     const { username, email, password } = req.body;
+//     // console.log(req.body)
+//     // Validate input fields
+//     if (!username || !email || !password) {
+//       return res.status(400).json({ message: "All fields are required" });
+//     }
+
+//     // Check if the email is already registered
+//     const existingUser = await User.findOne({ email });
+//     if (existingUser) {
+//       return res.status(400).json({ message: "Email already registered" });
+//     }
+
+//     // Fetch the PG data associated with the logged-in user
+//     const pg = await PG.findOne({ owner: ownerId });
+
+//     if (!pg) {
+//       return res.status(404).json({ message: "PG not found" });
+//     }
+
+//     // Check if there's space available (based on beds or rooms)
+//     if (pg.availableBeds <= 0 || pg.availableRooms <= 0) {
+//       return res
+//         .status(400)
+//         .json({ message: "No available beds or rooms in your PG" });
+//     }
+//     // Create a new user (Student account)
+//     const newUser = new User({
+//       username,
+//       email,
+//       password,
+//       role: "student", // Assign the role as 'student'
+//     });
+
+//     // Save the new user to the database
+//     await newUser.save();
+
+//     // Create a new student linked to the PG and the user account
+//     const newStudent = new Student({
+//       ...req.body,
+//       userId: newUser._id, // Reference the user's ID
+//       pgId: pg._id, // Reference the PG's ID
+//       createdBy: ownerId, // Set the creator as the logged-in PG owner
+//     });
+
+//     // Save the student to the database
+//     await newStudent.save();
+
+//     // Update the PG data
+//     pg.students.push(newStudent._id); // Add the student to the PG's list
+//     pg.availableBeds -= 1;
+//     pg.availableRooms -= 1;
+
+//     // Save the updated PG data to the database
+//     await pg.save();
+
+//     res.status(201).json({
+//       message: "Student successfully added and registered",
+//       student: newStudent,
+//       loginDetails: {
+//         email: newUser.email,
+//         password, // PG owner should share this with the student
+//       },
+//     });
+//   } catch (error) {
+//     console.error("Error adding student:", error);
+//     res
+//       .status(500)
+//       .json({ message: "Error adding student", error: error.message });
+//   }
+// };
+
+
 export const addStudent = async (req, res) => {
   try {
-    // `req.user` contains the user ID of the PG owner (set by the auth middleware)
-    const ownerId = req.user.id;
-    const { username, email, password } = req.body;
-    // console.log(req.body)
+    const ownerId = req.user.id; // ID of the PG owner (set by auth middleware)
+    const { username, email, password, pgId } = req.body;
+    console.log(pgId,ownerId)
+    // console.log(pg)
+    if (!mongoose.Types.ObjectId.isValid(pgId)) {
+      return res.status(400).json({ message: "Invalid PG ID" });
+    }
+
     // Validate input fields
-    if (!username || !email || !password) {
+    if (!username || !email || !password || !pgId) {
       return res.status(400).json({ message: "All fields are required" });
     }
 
@@ -93,23 +152,26 @@ export const addStudent = async (req, res) => {
       return res.status(400).json({ message: "Email already registered" });
     }
 
-    // Fetch the PG data associated with the logged-in user
-    const pg = await PG.findOne({ owner: ownerId });
+    // Fetch the specific PG based on the `pgId` provided in the form
+    const pg = await PG.findOne({ _id: pgId, owner: ownerId });
+    console.log(pgId,ownerId)
+    console.log(pg)
+
+    // const { pg.id } = req.body;
+
+
 
     if (!pg) {
-      return res.status(404).json({ message: "PG not found" });
+      return res.status(404).json({ message: "PG not found or unauthorized access" });
     }
 
     // Check if there's space available (based on beds or rooms)
     if (pg.availableBeds <= 0 || pg.availableRooms <= 0) {
       return res
         .status(400)
-        .json({ message: "No available beds or rooms in your PG" });
+        .json({ message: "No available beds or rooms in the selected PG" });
     }
 
-    // Hash the student's password
-    // const hashedPassword = await bcrypt.hash(password, 10);
-    console.log();
     // Create a new user (Student account)
     const newUser = new User({
       username,
@@ -121,11 +183,11 @@ export const addStudent = async (req, res) => {
     // Save the new user to the database
     await newUser.save();
 
-    // Create a new student linked to the PG and the user account
+    // Create a new student linked to the specific PG and the user account
     const newStudent = new Student({
       ...req.body,
       userId: newUser._id, // Reference the user's ID
-      pgId: pg._id, // Reference the PG's ID
+      pgId: pg._id, // Reference the selected PG's ID
       createdBy: ownerId, // Set the creator as the logged-in PG owner
     });
 
@@ -155,6 +217,7 @@ export const addStudent = async (req, res) => {
       .json({ message: "Error adding student", error: error.message });
   }
 };
+
 
 export const getAllStudents = async (req, res) => {
   try {

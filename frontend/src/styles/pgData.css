@@ -1,74 +1,73 @@
-/* Container for all cards */
+/* Overall container */
 .pg-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-    padding: 20px;
-    background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 15px 0;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Header styling */
+.pg-container h3 {
+  font-size: 1.5em;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* Paragraph styling */
+.pg-container p {
+  font-size: 1.1em;
+  color: #555;
+  margin: 5px 0;
+}
+
+/* Title styling for PG Status */
+h2 {
+  text-align: center;
+  color: #2d2d2d;
+  font-size: 2em;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+/* Loading and Error message styling */
+p {
+  font-size: 1.2em;
+  text-align: center;
+  color: #777;
+}
+
+/* Empty PGs message styling */
+p.no-pgs {
+  font-size: 1.2em;
+  text-align: center;
+  color: #ff5e5e;
+  font-weight: bold;
+}
+
+/* Styling for when there's no PG data */
+.pg-container h3, .pg-container p {
+  font-size: 1.2em;
+  text-align: left;
+}
+
+/* Add some spacing between PG info sections */
+.pg-container p {
+  margin-bottom: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .pg-container {
+    padding: 15px;
   }
-  
-  /* Individual card styles */
-  .card {
-    background-color: #ffffff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  .pg-container h3 {
+    font-size: 1.3em;
   }
-  
-  .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+
+  .pg-container p {
+    font-size: 1em;
   }
-  
-  /* Title of each card */
-  .card h3 {
-    font-size: 1.5rem;
-    color: #333;
-    margin-bottom: 10px;
-  }
-  
-  /* Data in big size */
-  .card p {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #007bff;
-    margin: 0;
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .pg-container {
-      padding: 10px;
-      gap: 15px;
-    }
-  
-    .card {
-      padding: 15px;
-    }
-  
-    .card h3 {
-      font-size: 1.3rem;
-    }
-  
-    .card p {
-      font-size: 2rem;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .card {
-      padding: 10px;
-    }
-  
-    .card h3 {
-      font-size: 1.2rem;
-    }
-  
-    .card p {
-      font-size: 1.8rem;
-    }
-  }
-  
+}

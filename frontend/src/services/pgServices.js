@@ -23,3 +23,10 @@ export const fetchPGDataService = async () => {
     const { data } = await axios.get(`${BASE_URL}/pg/pg-data`,config);
     return data;
 };
+
+
+// export const fetchOwnerPGs = async (userId) => {
+//   console.log(userId)
+//   const response = await axios.get(`${BASE_URL}/pg/owner/${userId}`);
+//   return response.data;
+// };

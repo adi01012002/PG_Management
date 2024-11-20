@@ -33,24 +33,68 @@ export const registerPG = async (req, res) => {
 };
 
 
+// export const getPGData = async (req, res) => {
+//     try {
+//       const userId = req.user.id;
+  
+//       // Fetch PG data for the logged-in user
+//       const pg = await PG.find({ owner: userId });
+//       // console.log()
+  
+//       if (!pg) {
+//         return res.status(404).json({ message: 'PG not found' });
+//       }
+  
+//       res.status(200).json({
+//         name:pg.name,
+//         totalStudents: pg.students.length,
+//         availableRooms: pg.availableRooms,
+//         availableBeds: pg.availableBeds,
+//       });
+//     } catch (error) {
+//       res.status(500).json({ message: 'Error fetching PG data', error });
+//     }
+//   };
+
+
 export const getPGData = async (req, res) => {
-    try {
-      const userId = req.user.id;
-  
-      // Fetch PG data for the logged-in user
-      const pg = await PG.findOne({ owner: userId });
-  
-      if (!pg) {
-        return res.status(404).json({ message: 'PG not found' });
-      }
-  
-      res.status(200).json({
-        name:pg.name,
-        totalStudents: pg.students.length,
-        availableRooms: pg.availableRooms,
-        availableBeds: pg.availableBeds,
-      });
-    } catch (error) {
-      res.status(500).json({ message: 'Error fetching PG data', error });
+  try {
+    const userId = req.user.id;
+    // console.log(userId,req.user)
+
+    // Fetch all PGs for the logged-in user
+    const pgs = await PG.find({ owner: userId });
+    // console.log(pgs)
+
+    if (!pgs || pgs.length === 0) {
+      return res.status(404).json({ message: 'No PGs found' });
     }
-  };
+
+    // Map PGs to the required format
+    const pgData = pgs.map((pg) => ({
+      name: pg.name,
+      _id:pg._id,
+      totalStudents: pg.students.length,
+      availableRooms: pg.availableRooms,
+      availableBeds: pg.availableBeds,
+    }));
+
+    res.status(200).json(pgData);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching PG data', error });
+  }
+};
+
+
+
+  // Controller to fetch all PGs for a specific owner
+export const fetchOwnerPGs = async (req, res) => {
+  const {userId}  = req.params;
+  try {
+      const pgs = await PG.find({ owner:userId });
+      console.log(pgs)
+      res.status(200).json(pgs);
+  } catch (error) {
+      res.status(500).json({ message: 'Error fetching PGs for owner', error });
+  }
+};
