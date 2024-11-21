@@ -73,6 +73,10 @@ const App = () => {
         path="/students/:id/payment-history"
         element={<StudentPayment />}
       />
+      {/* <Route
+        path="/student/:id/payments"
+        element={<StudentPayment />}
+      /> */}
       <Route path="/auth/register-pg" element={<PgRegistrationForm />} />
       <Route path="/auth/pg-status" element={<PgData />} />
       <Route path="/student/:id/dashboard" element={<StudentDashboard />} />

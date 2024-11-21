@@ -33,7 +33,7 @@ export const fetchPaymentHistoryAction = () => async (dispatch) => {
 export const fetchStudentPaymentsAction = (studentId) => async (dispatch) => {
   dispatch({ type: 'FETCH_STUDENT_PAYMENTS_REQUEST' });
   try {
-    console.log(studentId)
+    // console.log(studentId)
       const payments = await fetchStudentPayments(studentId);
       console.log(studentId)
       dispatch({ type: 'FETCH_STUDENT_PAYMENTS_SUCCESS', payload: payments });

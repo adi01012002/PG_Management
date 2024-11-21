@@ -94,7 +94,7 @@ const handleAddPaymentClick = () => {
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>{error}</p>;
-    console.log(student)
+    // console.log(student)
     if (!student) return <p>Student details are loading...</p>;
 
     const handleNavigation = (path) => {
