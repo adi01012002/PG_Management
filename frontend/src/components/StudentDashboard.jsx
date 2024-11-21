@@ -19,8 +19,6 @@ const StudentDashboard = () => {
     navigate(path); // Navigate to desired path
   };
 
-  
-
   return (
     <div className="dashboard-layout">
       {/* Navbar */}
