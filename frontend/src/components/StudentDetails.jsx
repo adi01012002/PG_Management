@@ -68,11 +68,13 @@ const handleAddPaymentClick = () => {
         </div>
         <div className="student-card">
         <h2>{student.username}</h2>
-        <p>Address: {student.address}</p>
-        <p>Year: {student.year}</p>
-        <p>Age: {student.age}</p>
-        <p>Email: {student.email}</p>
-        <p>Phone Number: {student.phone}</p>
+        <p><strong>Pg-Name:</strong> {student?.pgId?.name}</p>
+        {/* <p><strong>Pg-Owner:</strong> {student?.createdBy?.username}</p> */}
+        <p><strong>Year:</strong> {student.year}</p>
+        <p><strong>Age:</strong> {student.age}</p>
+        <p><strong>Email:</strong> {student.email}</p>
+        <p><strong>Phone Number:</strong>{student.phone}</p>
+        <p> <strong>Address:</strong>{student.address}</p>
         <div className="student-actions">
         <button onClick={handleUpdateClick} className="action-button">Update</button>
         <button onClick={handleDeleteClick} className="action-button delete-button">Delete</button>

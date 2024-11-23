@@ -130,12 +130,11 @@ const generateToken = (id, role) => {
 //   }
 // };
 
-
 export const addStudent = async (req, res) => {
   try {
     const ownerId = req.user.id; // ID of the PG owner (set by auth middleware)
     const { username, email, password, pgId } = req.body;
-    console.log(pgId,ownerId)
+    console.log(pgId, ownerId);
     // console.log(pg)
     if (!mongoose.Types.ObjectId.isValid(pgId)) {
       return res.status(400).json({ message: "Invalid PG ID" });
@@ -154,15 +153,15 @@ export const addStudent = async (req, res) => {
 
     // Fetch the specific PG based on the `pgId` provided in the form
     const pg = await PG.findOne({ _id: pgId, owner: ownerId });
-    console.log(pgId,ownerId)
-    console.log(pg)
+    console.log(pgId, ownerId);
+    console.log(pg);
 
     // const { pg.id } = req.body;
 
-
-
     if (!pg) {
-      return res.status(404).json({ message: "PG not found or unauthorized access" });
+      return res
+        .status(404)
+        .json({ message: "PG not found or unauthorized access" });
     }
 
     // Check if there's space available (based on beds or rooms)
@@ -218,13 +217,15 @@ export const addStudent = async (req, res) => {
   }
 };
 
-
 export const getAllStudents = async (req, res) => {
   try {
     const userId = req.user.id; // User ID from the authenticated request
     //   console.log(userId)
 
-    const students = await Student.find({ createdBy: userId }); // Find students linked to the owner
+    const students = await Student.find({ createdBy: userId }).populate(
+      "pgId",
+      "name"
+    ); // Find students linked to the owner
     //   console.log(students)
     res.status(200).json(students);
   } catch (error) {
@@ -289,7 +290,7 @@ export const updateStudent = async (req, res) => {
   const { username, age, email, address, phone, year } = req.body; // Get the updated data
 
   try {
-    const student = await Student.findById(id).populate('userId');; // Find the student by ID
+    const student = await Student.findById(id).populate("userId"); // Find the student by ID
     if (!student) {
       return res.status(404).json({ message: "Student not found" });
     }
@@ -312,18 +313,18 @@ export const updateStudent = async (req, res) => {
     // }
     // await student.save(); // Save the updated student
 
-      // Update the associated user details (username, email)
+    // Update the associated user details (username, email)
     const user = student.userId; // Retrieve the associated User
-      // Update the associated user details (email, username)
-      console.log(user)
-      if (email) user.email = email;
-      if (username) user.username = username;
+    // Update the associated user details (email, username)
+    console.log(user);
+    if (email) user.email = email;
+    if (username) user.username = username;
 
-      // Save updated user and student details
-       // Save the new user to the database
-      await user.save();
-      // await User.save();  // Save the user (email, username)
-      await student.save();       // Save the student details
+    // Save updated user and student details
+    // Save the new user to the database
+    await user.save();
+    // await User.save();  // Save the user (email, username)
+    await student.save(); // Save the student details
 
     res.status(200).json(student); // Return the updated student
   } catch (error) {
@@ -335,7 +336,9 @@ export const updateStudent = async (req, res) => {
 export const getStudentById = async (req, res) => {
   try {
     const { id } = req.params;
-    const student = await Student.findOne({ _id: id, createdBy: req.user.id });
+    const student = await Student.findOne({ _id: id, createdBy: req.user.id })
+      .populate("pgId", "name") // Populate PG's name
+      .populate("createdBy", "username");
 
     if (!student) {
       return res
@@ -447,7 +450,6 @@ export const loginStudent = async (req, res) => {
   }
 };
 
-
 // Fetch Student Profile
 // export const getStudentProfile = async (req, res) => {
 //   const { id } = req.params;
@@ -462,16 +464,15 @@ export const loginStudent = async (req, res) => {
 //   }
 // };
 
-
 export const getStudentProfile = async (req, res) => {
   // console.log(req.user)
   try {
     const studentId = req.user._id; // Assuming `studentId` is stored in the user payload
     // console.log(studentId)
-    const student = await Student.findOne({userId:studentId})
-    .populate("pgId", "name") // Populate PG's name
-    .populate("createdBy", "username") 
-    .select("-password"); // Exclude password;
+    const student = await Student.findOne({ userId: studentId })
+      .populate("pgId", "name") // Populate PG's name
+      .populate("createdBy", "username")
+      .select("-password"); // Exclude password;
 
     if (!student) {
       return res.status(404).json({ message: "Student not found" });
@@ -487,7 +488,7 @@ export const getStudentProfile = async (req, res) => {
 export const getStudentPayments = async (req, res) => {
   // const { id } = req.params;
   const studentId = req.user._id;
-  const student = await Student.findOne({userId:studentId})
+  const student = await Student.findOne({ userId: studentId });
   // student.id
   try {
     const payments = await Payment.find({ id: student.id });

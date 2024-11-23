@@ -171,6 +171,7 @@ const handleNavigation = (path) => {
                 students.map((student) => (
                     <div key={student._id} className="student-card">
                         <p><strong>{student.username}</strong></p>
+                        <p><strong>Pg-Name:</strong> {student?.pgId?.name}</p>
                         <button onClick={() => handleViewMoreClick(student._id)}>View More Details</button>
                     </div>
                 ))
