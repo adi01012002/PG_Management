@@ -446,3 +446,53 @@ export const loginStudent = async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
+
+
+// Fetch Student Profile
+// export const getStudentProfile = async (req, res) => {
+//   const { id } = req.params;
+//   try {
+//     const student = await Student.findById(id).select("-password"); // Exclude password
+//     if (!student) {
+//       return res.status(404).json({ message: "Student not found" });
+//     }
+//     res.status(200).json(student);
+//   } catch (error) {
+//     res.status(500).json({ message: "Server Error", error: error.message });
+//   }
+// };
+
+
+export const getStudentProfile = async (req, res) => {
+  // console.log(req.user)
+  try {
+    const studentId = req.user._id; // Assuming `studentId` is stored in the user payload
+    // console.log(studentId)
+    const student = await Student.findOne({userId:studentId})
+    .populate("pgId", "name") // Populate PG's name
+    .populate("createdBy", "username") 
+    .select("-password"); // Exclude password;
+
+    if (!student) {
+      return res.status(404).json({ message: "Student not found" });
+    }
+
+    res.status(200).json(student);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// Fetch Payments Made by the Student
+export const getStudentPayments = async (req, res) => {
+  // const { id } = req.params;
+  const studentId = req.user._id;
+  const student = await Student.findOne({userId:studentId})
+  // student.id
+  try {
+    const payments = await Payment.find({ id: student.id });
+    res.status(200).json(payments);
+  } catch (error) {
+    res.status(500).json({ message: "Server Error", error: error.message });
+  }
+};

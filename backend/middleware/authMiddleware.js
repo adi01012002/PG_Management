@@ -39,43 +39,26 @@ const authMiddleware = (req, res, next) => {
 //   };
 export default authMiddleware;
 
+export const protect = async (req, res, next) => {
+  try {
+    const token = req.headers.authorization?.split(" ")[1];
 
+    if (!token) {
+      return res.status(401).json({ message: "Not authorized, no token" });
+    }
 
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
+    const user = await User.findById(decoded.id);
+    // console.log(user)
 
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import jwt from "jsonwebtoken";
-// import dotenv from "dotenv";
-// import User from "../models/userModel.js";
-// dotenv.config();
-
-// const authMiddleware = (req, res, next) => {
-//   const token = req.headers.authorization;
-//   console.log(token);
-//   if (!token) return res.status(401).json({ message: "Access Denied" });
-
-//   try {
-//     const verified = jwt.verify(token, process.env.JWT_SECRET);
-//     req.user = verified;
-//     next();
-//   } catch (error) {
-//     res.status(400).json({ message: "Invalid Token" });
-//   }
-// };
-
-// export default authMiddleware;
+    req.user = user; // Attach the user object to the request
+    next();
+  } catch (error) {
+    res.status(401).json({ message: "Not authorized, token failed" });
+  }
+};

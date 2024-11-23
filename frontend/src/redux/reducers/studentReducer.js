@@ -1,4 +1,6 @@
 const initialState = {
+  profile: null,
+  payments: [],
   students: [],
   student: null,
   loading: false,
@@ -52,6 +54,18 @@ const studentReducer = (state = initialState, action) => {
     case "UPDATE_STUDENT_SUCCESS":
       return { ...state, loading: false, student: action.payload, error: null };
     case "UPDATE_STUDENT_FAILURE":
+      return { ...state, loading: false, error: action.payload };
+    case "FETCH_PAYMENTS_REQUEST":
+      return { ...state, loading: true };
+    case "FETCH_PAYMENTS_SUCCESS":
+      return { ...state, loading: false, payments: action.payload };
+    case "FETCH_PAYMENTS_FAILURE":
+      return { ...state, loading: false, error: action.payload };
+    case "FETCH_PROFILE_REQUEST":
+      return { ...state, loading: true, error: null };
+    case "FETCH_PROFILE_SUCCESS":
+      return { ...state, loading: false, profile: action.payload, error: null };
+    case "FETCH_PROFILE_FAILURE":
       return { ...state, loading: false, error: action.payload };
     default:
       return state;

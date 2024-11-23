@@ -137,3 +137,45 @@ export const updateStudent = async (id, updatedData) => {
   const { data } = await axios.put(`${BASE_URL}/students/edit/${id}`, updatedData,config);
   return data;
 };
+
+
+// // Fetch Student Profile
+// export const getStudentProfile = async (id) => {
+//   try {
+//     const response = await axios.get(`${BASE_URL}/students/${id}/profile`);
+//     return response.data;
+//   } catch (error) {
+//     throw new Error(error.response ? error.response.data.message : error.message);
+//   }
+// };
+
+
+export const getStudentProfile = async (id) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/students/${id}/profile`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`, // Assuming JWT is stored in localStorage
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response?.data?.message || "Failed to fetch profile");
+  }
+};
+
+
+
+// Fetch Student Payments
+export const getStudentPayments = async (id) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/students/${id}/payments`,{
+    headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`, // Assuming JWT is stored in localStorage
+      }
+  });
+  console.log(response.data)
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response ? error.response.data.message : error.message);
+  }
+};

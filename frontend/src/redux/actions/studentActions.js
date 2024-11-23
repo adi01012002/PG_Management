@@ -85,6 +85,8 @@ import {
     fetchStudentByIdService,
     deleteStudent,
     updateStudent,
+    getStudentProfile,
+    getStudentPayments
 } from '../../services/studentService';
 
 // Action to add a student
@@ -166,3 +168,39 @@ export const updateStudentAction = (id, updatedData) => async (dispatch) => {
         });
     }
 };
+
+
+// // Fetch Student Profile
+// export const fetchStudentProfile = (id) => async (dispatch) => {
+//     dispatch({ type: 'FETCH_PROFILE_REQUEST' });
+//     try {
+//       const data = await getStudentProfile(id);
+//       dispatch({ type: 'FETCH_PROFILE_SUCCESS', payload: data });
+//     } catch (error) {
+//       dispatch({ type: 'FETCH_PROFILE_FAILURE', payload: error.message });
+//     }
+//   };
+
+
+export const fetchStudentProfile = (id) => async (dispatch) => {
+    dispatch({ type: "FETCH_PROFILE_REQUEST" });
+    try {
+      const profile = await getStudentProfile(id);
+      dispatch({ type: "FETCH_PROFILE_SUCCESS", payload: profile });
+    } catch (error) {
+      dispatch({
+        type: "FETCH_PROFILE_FAILURE",payload: error.response?.data.message || error.message,
+      });
+    }
+  };
+
+  // Fetch Payments
+export const fetchStudentPayments = (id) => async (dispatch) => {
+    dispatch({ type: 'FETCH_PAYMENTS_REQUEST' });
+    try {
+      const data = await getStudentPayments(id);
+      dispatch({ type: 'FETCH_PAYMENTS_SUCCESS', payload: data });
+    } catch (error) {
+      dispatch({ type: 'FETCH_PAYMENTS_FAILURE', payload: error.message });
+    }
+  };

@@ -15,6 +15,8 @@ import StudentPayment from "./components/StudentPayment";
 import PgRegistrationForm from "./components/PgRegistrationForm";
 import PgData from "./components/pgData";
 import StudentDashboard from "./components/StudentDashboard";
+import StudentProfile from "./components/StudentProfile";
+import StudentPayments from "./components/StudentPayments";
 
 const App = () => {
   const navigate = useNavigate(); // Initialize useNavigate
@@ -32,6 +34,7 @@ const App = () => {
         // Correct: Ensure the ID is a valid ObjectId
         // navigate(`/student/${studentId}`);
         navigate(`/student/${data._id}/dashboard`); // assuming studentId is returned in data
+        // navigate(`/student/dashboard`);
       } else if (data.role === "pgOwner") {
         navigate("auth/dashboard"); // Redirect to PG owner dashboard
       } else {
@@ -73,13 +76,18 @@ const App = () => {
         path="/students/:id/payment-history"
         element={<StudentPayment />}
       />
-      {/* <Route
+      <Route
+        path="/student/:id/profile"
+        element={<StudentProfile/>}
+      />
+       <Route
         path="/student/:id/payments"
-        element={<StudentPayment />}
-      /> */}
+        element={<StudentPayments/>}
+      />
       <Route path="/auth/register-pg" element={<PgRegistrationForm />} />
       <Route path="/auth/pg-status" element={<PgData />} />
       <Route path="/student/:id/dashboard" element={<StudentDashboard />} />
+      {/* <Route path="/student/dashboard" element={<StudentDashboard />} /> */}
     </Routes>
   );
 };
