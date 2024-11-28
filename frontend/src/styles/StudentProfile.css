@@ -1,0 +1,65 @@
+.student-profile {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    color: #333;
+  }
+  
+  .student-profile h1 {
+    text-align: center;
+    color: #4CAF50;
+    margin-bottom: 20px;
+  }
+  
+  .student-profile p {
+    margin: 10px 0;
+    line-height: 1.6;
+    font-size: 16px;
+  }
+  
+  .student-profile strong {
+    color: #333;
+  }
+  
+  .student-profile .error {
+    color: red;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 20px;
+  }
+  
+  .student-profile div {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .student-profile div p {
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .student-profile div p strong {
+    color: #555;
+  }
+  
+  @media (max-width: 768px) {
+    .student-profile {
+      padding: 15px;
+    }
+  
+    .student-profile h1 {
+      font-size: 1.5em;
+    }
+  
+    .student-profile p {
+      font-size: 14px;
+    }
+  }
+  

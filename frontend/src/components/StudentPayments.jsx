@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchStudentPayments } from "../redux/actions/studentActions"; // Fetch student payments action
-// import "../styles/StudentPayments.css";
+import "../styles/StudentPayments.css";
 
 const StudentPayments = () => {
   const dispatch = useDispatch();

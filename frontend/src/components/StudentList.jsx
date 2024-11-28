@@ -136,7 +136,6 @@ import { fetchStudentsAction } from '../redux/actions/studentActions';
 // import { useHistory } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
-
 const StudentList = () => {
     const dispatch = useDispatch();
     // const history = useHistory();
