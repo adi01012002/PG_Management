@@ -1,66 +1,9 @@
-// import axios from "axios";
-
-// const BASE_URL = "http://localhost:8090"; // Replace with your actual base URL
-// // const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8090';
-
-// export const register = async (userData) => {
-//   // console.log("Sending userData:", userData); // Check the data here
-//   const response = await axios.post(`${BASE_URL}/auth/register`, userData, {
-//     headers: { "Content-Type": "application/json" },
-//   });
-//   console.log("Response data:", response.data);
-//   return response.data;
-// };
-
-// export const login = async (userData) => {
-//   try {
-//     console.log("Sending userData:", userData);
-//     const response = await axios.post(`${BASE_URL}/auth/login`, userData, {
-//       headers: { "Content-Type": "application/json" },
-//     });
-//     console.log("Response data:", response.data);
-//     return response.data;
-//   } catch (error) {
-//     console.error("Login error:", error);
-//     throw error;
-//   }
-// };
-
-
 
 
 import axios from "axios";
 
 const BASE_URL = "http://localhost:8090"; // Replace with your actual base URL
 
-// export const register = async (userData) => {
-//   try {
-//     console.log("Registering user with data:", userData);
-//     const response = await axios.post(`${BASE_URL}/auth/register`, userData, {
-//       headers: { "Content-Type": "application/json" },
-//     });
-//     console.log("Registration successful, response data:", response.data);
-//     return response.data;
-//   } catch (error) {
-//     // Handle all types of errors
-//     if (error.response) {
-//       // Server responded with a status other than 2xx
-//       console.error("Error response from server:", error.response.data);
-//       console.error("Status code:", error.response.status);
-//       throw new Error(
-//         error.response.data.message || "Failed to register user"
-//       );
-//     } else if (error.request) {
-//       // Request was made, but no response was received
-//       console.error("No response received from server:", error.request);
-//       throw new Error("No response from server. Please try again later.");
-//     } else {
-//       // Something else happened in setting up the request
-//       console.error("Error in setting up the request:", error.message);
-//       throw new Error("An unexpected error occurred. Please try again.");
-//     }
-//   }
-// };
 
 export const register = async (userData) => {
   try {

@@ -45,4 +45,3 @@ export const fetchStudentPayments = async (studentId) => {
     return response.data;
 };
 
-//http://localhost:8090/payments/student/6732112bb88a98334e73e770
