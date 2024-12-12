@@ -8,11 +8,7 @@ export const registerPG = async (req, res) => {
     const { name,location, totalRooms, totalBeds } = req.body;
     console.log(req.body);
 
-    // Ensure no duplicate PG registration by the same user
-    // const existingPG = await PG.findOne({ owner: userId });
-    // if (existingPG) {
-    //   return res.status(400).json({ message: 'PG already registered for this user' });
-    // }
+
 
     // Create the PG with initial room and bed setup
     const pg = new PG({
